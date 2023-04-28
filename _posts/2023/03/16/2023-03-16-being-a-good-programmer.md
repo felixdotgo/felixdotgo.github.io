@@ -3,7 +3,6 @@ layout: post
 title: "Excited about the new chapter of being a good programmer"
 date: 2023-03-16 21:03:36 +0530
 categories: programmer software
-excerpts: Just a few words
 ---
 
 ## What I’m going to write down?

@@ -3,7 +3,6 @@ layout: post
 title: "The interviews"
 date: 2023-03-16 21:03:36 +0530
 categories: interview software engineer
-excerpts: A small journey
 ---
 
 I recently finished a bunch of interviews. The first interview made me feel nervous, and then I failed. But actually, I retrieve a lot from it. Before the interview, the only thing I planned was "planning to fail" - please don't try this like me. Positively, after listening to the interview questions, I did know that there are things I don't know, and I have to learn and practice them. So I'm starting to learn a few things quickly for the next session. Everything is back on track after the first interview I got
