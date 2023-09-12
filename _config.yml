@@ -25,7 +25,7 @@ plainwhite:
   # generate social links in footer
   social_links:
     github:  '0x46656C6978'
-    linkedIn: in/felixengineer
+    #linkedIn: in/your_username
     #dribbble: jekyll
     #flickr:   jekyll
     #instagram: jekyll
