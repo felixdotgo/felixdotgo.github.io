@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Fix VSCode login issue for Pop!_OS Cosmic"
-date: 2024-02-05 12:52:00 +7
+date: 2026-03-16 02:20:00 +7
 categories: software
 ---
 Recently I moved to Pop!_OS for some reasons. Then when I install and open VSCode I see a popup that tell me it cannot detect `gnome-keyring` so I have to Googling a bit.
