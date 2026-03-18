@@ -17,3 +17,9 @@ systemctl --user enable --now gnome-keyring-daemon.service
 # create config file and add this line `password optional pam_gnome_keyring.so`
 sudo nano /etc/pam.d/gdm-autologin
 ```
+
+Open file `~/.vscode/argv.json` and add this
+```
+// Fix keyring error
+"password-store": "gnome-libsecret"
+```
