@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How I built QueryBox and what AI actually helped with"
-date: 2026-03-16 02:20:00 +7
+date: 2026-04-05 19:00:00 +7
 categories: software
 ---
 
