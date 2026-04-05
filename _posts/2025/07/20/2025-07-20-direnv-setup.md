@@ -2,7 +2,7 @@
 layout: post
 title: "Setup direnv for your development environment"
 date: 2025-07-20 22:32:00 +7
-categories: setup direnv
+categories: direnv
 ---
 ## Setup direnv for your development environment
 Install from binary build
