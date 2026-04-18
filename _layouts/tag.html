@@ -23,7 +23,7 @@ layout: default
         {%- if post.tags.size > 0 -%}
         <ul class="post-tags">
           {%- for t in post.tags -%}
-          <li><a href="{{ '/tags/' | append: t | relative_url }}">{{ t }}</a></li>
+          <li><a href="{{ '/tags/' | append: t | append: '/' | relative_url }}">{{ t }}</a></li>
           {%- endfor -%}
         </ul>
         {%- endif -%}
