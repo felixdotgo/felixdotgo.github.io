@@ -2,16 +2,21 @@
 layout: default
 ---
 {%- assign date_format = site.plainwhite.date_format | default: "%b %-d, %Y" -%}
+{%- if page.tags.size > 0 -%}
+  {%- assign display_tags = page.tags -%}
+{%- else -%}
+  {%- assign display_tags = page.categories -%}
+{%- endif -%}
 <div class="post-container">
   <a class="post-link" href="{{ page.url | relative_url }}">
     <h2 class="post-title">{{ page.title | escape }}</h2>
   </a>
   <div class="post-meta">
     <div class="post-date"><i class="icon-calendar"></i>{{ page.date | date: date_format }}</div>
-    {%- if page.categories.size > 0 -%}
-    <ul class="post-categories">
-      {%- for tag in page.categories -%}
-      <li>{{ tag }}</li>
+    {%- if display_tags.size > 0 -%}
+    <ul class="post-tags">
+      {%- for tag in display_tags -%}
+      <li><a href="{{ '/tags/' | append: tag | relative_url }}">{{ tag }}</a></li>
       {%- endfor -%}
     </ul>
     {%- endif -%}
@@ -33,7 +38,6 @@ layout: default
       (d.head || d.body).appendChild(s);
     })();
   </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments
-      powered by Disqus.</a></noscript>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
   {%- endif -%}
 </div>

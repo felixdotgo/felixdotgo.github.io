@@ -1,336 +1,527 @@
+// ── SCSS vars (must come before imports that use them) ─
+$linkColor:    #2563eb;
+
 @import "ext/fonts";
 @import "ext/normalize";
 @import "syntax";
-
-$linkColor: #0a59b0;
-$mobileW: 768px;
+@import "toggle";
+@import "search";
+$mobileW:      768px;
 $smallMobileW: 480px;
-$bigScreenW: 1600px;
-$leftWidth: 220px;
+$bigScreenW:   1600px;
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
+// ── CSS Tokens (light default) ────────────────────────
+:root {
+  --bg:            #faf9f7;
+  --bg-alt:        #f0ede9;
+  --text:          #1c1917;
+  --text-muted:    #78716c;
+  --border:        #e5e1db;
+  --link:          #2563eb;
+  --link-hover:    #1d4ed8;
+  --tag-bg:        #ede9e4;
+  --tag-text:      #44403c;
+  --tag-bg-hover:  #ddd8d2;
+  --code-bg:       #f0ede9;
+  --sidebar-w:     220px;
 }
 
+// ── Reset ─────────────────────────────────────────────
+*, *:before, *:after { box-sizing: border-box; }
+
 body {
-  font-family: "Roboto Mono", monospace;
+  font-family: "Be Vietnam Pro", system-ui, sans-serif;
   font-size: 16px;
-  line-height: 1.2em;
+  line-height: 1.6;
   margin: 0;
+  background: var(--bg);
+  color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-img,
-embed,
-object,
-video {
-  max-width: 100%;
-}
+img, embed, object, video { max-width: 100%; }
 
 a {
-  color: #000;
-  transition: color 0.3s;
-  &:hover {
-    color: $linkColor;
-  }
+  color: var(--link);
+  text-decoration: none;
+  transition: color 0.2s;
+  &:hover { color: var(--link-hover); }
 }
 
 h2 {
   margin: 0.7em 0;
-  @media screen and (max-width: $mobileW) {
-    margin: 0.3em 0;
-  }
+  @media screen and (max-width: $mobileW) { margin: 0.3em 0; }
 }
+
+// ── Layout ────────────────────────────────────────────
 main {
   margin: 0 90px;
   display: flex;
   height: 100%;
+  outline: none;
+  min-height: 100vh;
 
-  @media screen and (min-width: $bigScreenW) {
-    margin: 0 auto;
-    max-width: 1440px;
-  }
-  @media screen and (max-width: 1280px) {
-    margin: 0 75px;
-  }
-  @media screen and (max-width: 1024px) {
-    margin: 0 35px;
-  }
+  @media screen and (min-width: $bigScreenW) { margin: 0 auto; max-width: 1440px; }
+  @media screen and (max-width: 1280px)     { margin: 0 75px; }
+  @media screen and (max-width: 1024px)     { margin: 0 35px; }
+  @media screen and (max-width: $mobileW)   { margin: 0 20px; flex-direction: column; }
+  @media screen and (max-width: $smallMobileW) { margin: 0; }
+}
 
+.content {
+  @media screen and (min-width: $mobileW + 1) {
+    max-width: calc(100% - var(--sidebar-w));
+    margin-left: var(--sidebar-w);
+    width: 100%;
+    padding-left: 20px;
+  }
   @media screen and (max-width: $mobileW) {
-    margin: 0 10px;
-    flex-direction: column;
-  }
-  @media screen and (max-width: $smallMobileW) {
-    margin: 0;
-  }
-
-  .content {
-    @media screen and (min-width: $mobileW + 1) {
-      max-width: calc(100% - #{$leftWidth});
-      margin-left: $leftWidth;
-      width: 100%;
-    }
-  }
-  .about {
-    display: flex;
-    height: 100vh;
-    padding-bottom: 15vh;
-    @media screen and (max-width: $mobileW) {
-      height: auto;
-      padding: 5vh 30px;
-    }
-    @media screen and (max-width: $smallMobileW) {
-      padding: 5vh 20px;
-    }
-    @media screen and (min-width: $mobileW + 1) {
-      position: fixed;
-      max-width: 280px;
-    }
-    min-width: $leftWidth;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    h2 {
-      font-size: 22px;
-      margin-top: 25px;
-      margin-bottom: 0;
-      color: #222222;
-      font-weight: normal;
-    }
-    .tagline {
-      text-align: center;
-      font-size: 22px;
-      margin-top: 0px;
-      color: #aaa;
-      white-space: pre-wrap;
-      line-height: normal;
-    }
-    img {
-      max-width: 150px;
-    }
-    img.dark {
-      display: none;
-    }
-    .about-header {
-      display: flex;
-      flex-direction: column;
-      .about-title {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 17px;
-      }
-    }
+    padding: 0;
   }
 }
+
+// ── Sidebar ───────────────────────────────────────────
+.about {
+  display: flex;
+  height: 100vh;
+  padding-bottom: 15vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--sidebar-w);
+
+  @media screen and (max-width: $mobileW) {
+    height: auto;
+    padding: 24px 24px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  @media screen and (max-width: $smallMobileW) { padding: 20px 16px 18px; }
+  @media screen and (min-width: $mobileW + 1) {
+    position: fixed;
+    max-width: 280px;
+    border-right: 1px solid var(--border);
+    height: 100vh;
+  }
+
+  img {
+    max-width: 96px;
+    border-radius: 50%;
+  }
+  img.dark { display: none; }
+
+  h2 {
+    font-family: "Be Vietnam Pro", system-ui, sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    margin: 14px 0 0;
+    color: var(--text);
+  }
+
+  .tagline {
+    font-family: "Be Vietnam Pro", system-ui, sans-serif;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 6px;
+    margin-bottom: 0;
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
+
+  .about-header {
+    display: flex;
+    flex-direction: column;
+    .about-title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+  }
+
+  .about-footer {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+  }
+}
+
 #title {
   a {
     text-decoration: none;
+    color: var(--text);
+    &:hover { color: var(--link); }
   }
 }
+
+// ── Social ────────────────────────────────────────────
 .social {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
+  margin: 10px 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  a {
-    margin-bottom: .5em;
-  }
-  li {
-    i {
-      font-size: 34px;
-    }
-  }
+  gap: 4px;
+
+  a { color: var(--text-muted); &:hover { color: var(--text); } }
+  li i { font-size: 24px; }
 }
 
+// ── Navigation ────────────────────────────────────────
 .navigation {
   width: 80%;
-
   ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
     margin-top: 0;
-
-    li:last-child {
-      a {
-        border-bottom: 0;
-      }
-    }
-
+    li:last-child a { border-bottom: 0; }
     a {
       display: block;
-      font-family: 'Roboto Mono', monospace;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
       text-align: center;
-      padding: 1rem 0;
+      padding: 0.75rem 0;
       text-decoration: none;
-      border-bottom: 1px solid #ececec;
-
-      @media screen and (max-width: $mobileW) {
-        padding: 2rem 0;
-      }
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+      &:hover { color: var(--link); }
     }
   }
 }
 
-.post-wrapper {
-  border-bottom: 1px solid #ececec;
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
-}
-
-.post-categories {
-  list-style-type: none;
-  margin: 0;
+// ── Post list ─────────────────────────────────────────
+.posts {
+  list-style: none;
+  margin: 40px 30px;
   padding: 0;
-  li {
-    font-size: 14px;
-    float: left;
-    background-color: #e3e3e3;
-    padding: 5px 20px;
-    border-radius: 2px;
-    @media screen and (max-width: $mobileW) {
-      margin-top: 5px;
-    }
-    margin-right: 10px;
-  }
-}
-.post-date {
-  margin-right: 10px;
-  color: #555;
-  min-width: 150px;
-}
-.post-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 30px;
-  @media screen and (max-width: $mobileW) {
-    flex-direction: column;
-    align-items: baseline;
-    .post-date {
-      margin: 10px 0;
-    }
-  }
-}
-.post-link {
-  text-decoration: none;
+
+  @media screen and (max-width: $mobileW)      { margin: 24px 20px; padding: 0 !important; }
+  @media screen and (max-width: $smallMobileW) { margin: 20px 16px; }
+
+  > li + li { margin-top: 32px; }
 }
 
-.post-title {
-  line-height: 1.2em;
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-.posts,
-.post-container {
-  list-style-type: none;
-  margin: 45px 30px;
-  @media screen and (max-width: $smallMobileW) {
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-  @media screen and (max-width: $mobileW) {
-    padding: 0 !important;
-    margin-top: 0;
-  }
-}
-.post-container {
-  padding-left: 30px;
-}
-.post {
-  font-family: "Roboto Mono", monospace;
-  font-weight: 300;
-  color: #222;
-  line-height: 1.9em;
-  p {
-    margin-top: 10px;
-  }
-  a {
-    color: $linkColor;
-    text-decoration: none;
-    transition: border-bottom 0.4s;
-    &:hover {
-      border-bottom: 0.5px solid $linkColor;
-    }
-  }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: Raleway, sans-serif;
-  }
-}
 .posts-labelgroup {
-  margin: 0 0 0.67em 0;
   display: flex;
   align-items: baseline;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border);
+  margin: 0 0 28px 0;
 }
 
 #posts-label {
-  font-size: 15px;
-  color: #555;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
   padding: 10px 0;
   font-weight: normal;
   margin: 0;
   overflow: hidden;
   transition: width 0.1s;
 }
-table {
-  th, td {
-    padding: 8px 13px;
-    border: 1px solid #dfe2e5;
-  }
-  th {
-    background-color: #eee;
-    font-family: Raleway;
+
+.post-link {
+  text-decoration: none;
+  color: var(--text);
+  &:hover { color: var(--link); }
+}
+
+.post-title {
+  font-family: "Be Vietnam Pro", system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 8px;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 28px;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: $mobileW) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    .post-date { margin: 4px 0 0; }
   }
 }
 
-footer {
-  display: none;
+.post-date {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  min-width: 120px;
+  i { margin-right: 4px; }
 }
-@media screen and (max-width: $mobileW) {
-  .about {
-    .about-header.condensed {
-      align-items: start;
-      align-self: start;
-      .about-title {
-        flex-direction: row;
-        margin-bottom: 10px;
-        img {
-          max-height: 40px;
-        }
-        h2 {
-          margin: 0 10px;
-        }
+
+// ── Tags & Categories ─────────────────────────────────
+.post-tags,
+.post-categories {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+
+  li {
+    a, span {
+      display: inline-block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: 3px 9px;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      &:hover {
+        background: var(--tag-bg-hover);
+        color: var(--text);
       }
-      .tagline {
-        font-size: 18px;
-        margin-bottom: 0px;
-      }
-    }
-    .about-footer.condensed {
-      display: none;
     }
   }
+}
+
+// ── Post content ──────────────────────────────────────
+.post-container {
+  margin: 40px 30px;
+  padding: 0;
+
+  @media screen and (max-width: $mobileW)      { margin: 24px 20px; }
+  @media screen and (max-width: $smallMobileW) { margin: 20px 16px; }
+}
+
+.post-wrapper {
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+}
+
+.post {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--text);
+
+  p { margin-top: 0; margin-bottom: 1.2em; }
+
+  a {
+    color: var(--link);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+    &:hover {
+      color: var(--link-hover);
+      border-bottom: none;
+    }
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Be Vietnam Pro", system-ui, sans-serif;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-top: 1.8em;
+    margin-bottom: 0.6em;
+    color: var(--text);
+  }
+  h1 { font-size: 26px; }
+  h2 { font-size: 20px; }
+  h3 { font-size: 17px; }
+
+  ul, ol { padding-left: 1.5em; margin-bottom: 1.2em; }
+  li { margin-bottom: 0.4em; }
+
+  code {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.875em;
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+
+  pre {
+    background: var(--code-bg);
+    border-radius: 5px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin-bottom: 1.2em;
+    code {
+      background: none;
+      padding: 0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+  }
+
+  blockquote {
+    border-left: 3px solid var(--border);
+    margin: 0 0 1.2em;
+    padding: 0 1em;
+    color: var(--text-muted);
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: 2em 0;
+  }
+}
+
+// ── Tables ────────────────────────────────────────────
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.2em;
+  font-size: 14px;
+  th, td {
+    padding: 8px 13px;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  th {
+    background: var(--bg-alt);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+  }
+}
+
+// ── Tag archive pages ─────────────────────────────────
+.tag-page {
+  margin: 40px 30px;
+  @media screen and (max-width: $mobileW) { margin: 24px 20px; }
+
+  .tag-page-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+    margin-bottom: 28px;
+
+    h1 {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 14px;
+      font-weight: normal;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin: 0 0 4px;
+    }
+    .tag-name {
+      font-family: "Be Vietnam Pro", system-ui, sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 8px;
+    }
+    .tag-back {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+      &:hover { color: var(--link); }
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+      &:first-child { border-top: 1px solid var(--border); }
+    }
+  }
+}
+
+.tags-index {
+  margin: 40px 30px;
+  @media screen and (max-width: $mobileW) { margin: 24px 20px; }
+
+  .tags-index-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+    margin-bottom: 28px;
+    h1 {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 14px;
+      font-weight: normal;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+  }
+
+  .tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    a {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: 6px 14px;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      &:hover { background: var(--tag-bg-hover); color: var(--text); }
+      .tag-count {
+        color: var(--text-muted);
+        margin-left: 4px;
+      }
+    }
+  }
+}
+
+// ── Footer ────────────────────────────────────────────
+footer { display: none; }
+
+@media screen and (max-width: $mobileW) {
+  .about {
+    // non-condensed (home page): centered stack, compact
+    img { max-width: 72px; }
+    h2  { font-size: 15px; margin-top: 10px; }
+    .tagline { font-size: 11px; }
+
+    .about-header.condensed {
+      align-items: flex-start;
+      align-self: flex-start;
+      .about-title {
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 6px;
+        img { max-height: 36px; border-radius: 50%; }
+        h2 { margin: 0 0 0 10px; font-size: 15px; }
+      }
+      .tagline { font-size: 11px; margin-bottom: 0; }
+    }
+    .about-footer.condensed { display: none; }
+  }
+
+  // post content on mobile — comfortable reading
+  .post {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .post-title { font-size: 18px; }
+
   footer.condensed {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 40px;
-    @media screen and (max-width: $smallMobileW){
-      margin: 0 20px;
-    }
-    border-top: 1px solid #eee;
+    margin: 0 24px;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+    @media screen and (max-width: $smallMobileW) { margin: 0 16px; }
   }
 }

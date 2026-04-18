@@ -26,32 +26,30 @@ layout: default
     {%- for post in site.posts -%}
       <li>
         {%- assign date_format = site.plainwhite.date_format | default: "%b %-d, %Y" -%}
+        {%- if post.tags.size > 0 -%}
+          {%- assign display_tags = post.tags -%}
+        {%- else -%}
+          {%- assign display_tags = post.categories -%}
+        {%- endif -%}
         <a class="post-link" href="{{ post.url | relative_url }}">
           <h2 class="post-title">{{ post.title | escape }}</h2>
         </a>
         <div class="post-meta">
           <div class="post-date">
-            <i class="icon-calendar"></i>
-            {{ post.date | date: date_format }}
+            <i class="icon-calendar"></i>{{ post.date | date: date_format }}
           </div>
-          {%- if post.categories.size > 0-%}
-          <ul class="post-categories">
-            {%- for tag in post.categories -%}
-            <li>{{ tag }}</li>
+          {%- if display_tags.size > 0 -%}
+          <ul class="post-tags">
+            {%- for tag in display_tags -%}
+            <li><a href="{{ '/tags/' | append: tag | relative_url }}">{{ tag }}</a></li>
             {%- endfor -%}
           </ul>
           {%- endif -%}
         </div>
-        <div class="post">
-          {%- if site.show_excerpts -%}
-            {{ post.excerpt }}
-          {%- endif -%}
-        </div>
+        {%- if site.show_excerpts -%}
+        <div class="post">{{ post.excerpt }}</div>
+        {%- endif -%}
       </li>
     {%- endfor -%}
   </ul>
-
-  <!-- <p class="feed-subscribe"><svg class="svg-icon orange">
-		<use xlink:href="{{ '/assets/minima-social-icons.svg#rss' | relative_url }}"></use>
-	</svg><a href="{{ "/feed.xml" | relative_url }}">Subscribe</a></p> -->
 {%- endif -%}

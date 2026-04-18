@@ -3,6 +3,7 @@ layout: post
 title: "How we built QueryBox and what AI actually helped with"
 date: 2026-04-05 19:00:00 +7
 categories: software
+tags: [software, ai]
 ---
 
 ## The problem

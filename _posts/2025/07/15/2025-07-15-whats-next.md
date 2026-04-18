@@ -3,6 +3,7 @@ layout: post
 title: "What's next?"
 date: 2025-07-15 22:32:00 +7
 categories: thought
+tags: [thought]
 ---
 It's been more than two weeks since I got fired. I'm not even sad, because I had already anticipated that day would come - sooner or later. I also acknowledge that I lacked some key skills that could have helped me perform better at work. So when my engineering manager decided to stop engaging with me, I just thought, “Okay.”
 

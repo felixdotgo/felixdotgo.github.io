@@ -22,6 +22,11 @@ plainwhite:
     #- home
     - page
     - post
+  navigation:
+    - title: About
+      url: /about/
+    - title: Tags
+      url: /tags/
   # generate social links in footer
   social_links:
     github:  '0x46656C6978'

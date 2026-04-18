@@ -1,0 +1,37 @@
+---
+layout: default
+---
+{%- assign date_format = site.plainwhite.date_format | default: "%b %-d, %Y" -%}
+{%- assign tag_posts = site.posts | where_exp: "post", "post.tags contains page.tag" -%}
+
+<div class="tag-page">
+  <div class="tag-page-header">
+    <h1>tag</h1>
+    <div class="tag-name">{{ page.tag }}</div>
+    <a class="tag-back" href="{{ '/tags/' | relative_url }}">← all tags</a>
+  </div>
+
+  {%- if tag_posts.size > 0 -%}
+  <ul>
+    {%- for post in tag_posts -%}
+    <li>
+      <a class="post-link" href="{{ post.url | relative_url }}">
+        <h2 class="post-title">{{ post.title | escape }}</h2>
+      </a>
+      <div class="post-meta">
+        <div class="post-date"><i class="icon-calendar"></i>{{ post.date | date: date_format }}</div>
+        {%- if post.tags.size > 0 -%}
+        <ul class="post-tags">
+          {%- for t in post.tags -%}
+          <li><a href="{{ '/tags/' | append: t | relative_url }}">{{ t }}</a></li>
+          {%- endfor -%}
+        </ul>
+        {%- endif -%}
+      </div>
+    </li>
+    {%- endfor -%}
+  </ul>
+  {%- else -%}
+  <p style="color: var(--text-muted); font-family: 'Roboto Mono', monospace; font-size: 14px;">No posts with this tag yet.</p>
+  {%- endif -%}
+</div>

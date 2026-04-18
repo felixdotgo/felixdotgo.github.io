@@ -3,6 +3,7 @@ layout: post
 title: "Delve not working with GoLand"
 date: 2024-02-05 12:52:00 +7
 categories: software
+tags: [go, software]
 ---
 
 I have a bunch of projects on my computer and not all of them use the same Go version. Then I found [gvm](https://github.com/moovweb/gvm), this tool help me switch to the right version of Go that I want for each project. Unfortunately, another problem happened, I can't use delve to run debugger - which still run smoothly on VSCode. So I did googling a bit and turns out GoLand has builtin delve which could be incompatible with my current Go version.
