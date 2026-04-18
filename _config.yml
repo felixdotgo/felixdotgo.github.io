@@ -1,5 +1,5 @@
 title: Technology and self-development
-author: 0x46656C6978
+author: felixdotgo
 email: admin@iamfelix.dev
 description: >
   A blog of a senior fresher and lazy engineer
@@ -25,11 +25,9 @@ plainwhite:
   navigation:
     - title: About
       url: /about/
-    - title: Tags
-      url: /tags/
   # generate social links in footer
   social_links:
-    github:  '0x46656C6978'
+    github:  'felixdotgo'
     #linkedIn: in/your_username
     #dribbble: jekyll
     #flickr:   jekyll
@@ -60,6 +58,7 @@ theme: plainwhite
 plugins:
   - jekyll-seo-tag
   - jekyll-archives
+#  - jekyll-feed
 
 jekyll-archives:
   enabled:
@@ -68,4 +67,3 @@ jekyll-archives:
     tag: tag
   permalinks:
     tag: /tags/:name/
-#  - jekyll-feed
