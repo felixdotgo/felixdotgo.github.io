@@ -1,16 +1,16 @@
 // Dark mode: override CSS variables + syntax highlighting
 body.dark {
-  --bg:            #1c1917;
-  --bg-alt:        #24211e;
-  --text:          #e8e5e1;
-  --text-muted:    #a8a29e;
-  --border:        #2e2b27;
-  --link:          #7eb8f7;
-  --link-hover:    #a5c8f7;
-  --tag-bg:        #262320;
-  --tag-text:      #c9c4bf;
-  --tag-bg-hover:  #312e2a;
-  --code-bg:       #141210;
+  --bg:            #0d0d0d;
+  --bg-alt:        #1a1a1a;
+  --text:          #f5f3e8;
+  --text-muted:    #999999;
+  --border:        #f5f3e8;
+  --link:          #f97316;
+  --link-hover:    #fb923c;
+  --tag-bg:        #1a1a1a;
+  --tag-text:      #f5f3e8;
+  --tag-bg-hover:  #2a2a2a;
+  --code-bg:       #141414;
 
   background-color: var(--bg);
   color: var(--text);

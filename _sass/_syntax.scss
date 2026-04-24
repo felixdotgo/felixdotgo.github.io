@@ -1,11 +1,11 @@
 @import 'ext/solarized-light';
 
 .highlight {
-	background-color: #f4f4f4;
+	background-color: transparent;
 }
 
 div.highlight {
-	padding: 5px 20px;
+	padding: 0;
 }
 pre.highlight, code {
 	font-family: 'Consolas', Menlo, monospace;
