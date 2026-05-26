@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{{ $plain := .Site.Params.plainwhite }}
+{{ $pageKind := "" }}
+{{ if .IsHome }}
+  {{ $pageKind = "home" }}
+{{ else if and .IsPage (eq .Section "posts") }}
+  {{ $pageKind = "post" }}
+{{ else if .IsPage }}
+  {{ $pageKind = "page" }}
+{{ end }}
+{{ $condensedClass := "" }}
+{{ if in $plain.condensedMobile $pageKind }}
+  {{ $condensedClass = "condensed" }}
+{{ end }}
+<html lang="{{ $plain.htmlLang }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header {{ $condensedClass }}">
+        <div class="about-title">
+          <a href="{{ "/" | relURL }}">
+            <img src="{{ $plain.portfolioImage | relURL }}" alt="{{ $plain.name }}">
+          </a>
+          <h2 id="title">
+            <a href="{{ "/" | relURL }}">{{ $plain.name }}</a>
+          </h2>
+        </div>
+        {{ with $plain.tagline }}
+          <p class="tagline">{{ . }}</p>
+        {{ end }}
+      </div>
+
+      {{ partial "sidebar-footer.html" (dict "page" . "condensedClass" $condensedClass) }}
+    </section>
+
+    <section class="content">
+      {{ block "main" . }}{{ end }}
+    </section>
+
+    <footer class="{{ $condensedClass }}">
+      {{ partial "sidebar-footer.html" (dict "page" . "condensedClass" $condensedClass) }}
+    </footer>
+  </main>
+
+  {{ if $plain.search }}
+    <script src="{{ "assets/js/simple-jekyll-search.min.js" | relURL }}"></script>
+    <script src="{{ "assets/js/search.js" | relURL }}"></script>
+  {{ end }}
+</body>
+</html>

@@ -1,0 +1,104 @@
+{{ $page := .page }}
+{{ $plain := $page.Site.Params.plainwhite }}
+<div class="{{ .condensedClass }}">
+  {{ with $plain.socialLinks }}
+    <ul class="social about-footer {{ $.condensedClass }}">
+      {{ with .github }}
+        <a href="https://github.com/{{ . }}" target="_blank" rel="noreferrer">
+          <li><i class="icon-github-circled"></i></li>
+        </a>
+      {{ end }}
+      {{ with .gitlab }}
+        <a href="https://gitlab.com/{{ . }}" target="_blank" rel="noreferrer">
+          <li><i class="icon-gitlab"></i></li>
+        </a>
+      {{ end }}
+      {{ with .linkedin }}
+        <a href="https://www.linkedin.com/{{ . }}" target="_blank" rel="noreferrer">
+          <li><i class="icon-linkedin-squared"></i></li>
+        </a>
+      {{ end }}
+      {{ with .twitter }}
+        <a href="https://twitter.com/{{ . }}" target="_blank" rel="noreferrer">
+          <li><i class="icon-twitter-squared"></i></li>
+        </a>
+      {{ end }}
+      {{ with .instagram }}
+        <a href="https://instagram.com/{{ . }}" target="_blank" rel="noreferrer">
+          <li><i class="icon-instagram"></i></li>
+        </a>
+      {{ end }}
+      {{ with .facebook }}
+        <a href="https://facebook.com/{{ . }}" target="_blank" rel="noreferrer">
+          <li><i class="icon-facebook-squared"></i></li>
+        </a>
+      {{ end }}
+      {{ with .youtube }}
+        <a href="https://youtube.com/{{ . }}" target="_blank" rel="noreferrer">
+          <li><i class="icon-youtube"></i></li>
+        </a>
+      {{ end }}
+      {{ with .pinterest }}
+        <a href="https://pinterest.com/{{ . }}" target="_blank" rel="noreferrer">
+          <li><i class="icon-pinterest-squared"></i></li>
+        </a>
+      {{ end }}
+      {{ with .dribbble }}
+        <a href="https://dribbble.com/{{ . }}" target="_blank" rel="noreferrer">
+          <li><i class="icon-dribbble"></i></li>
+        </a>
+      {{ end }}
+      {{ with .flickr }}
+        <a href="https://flickr.com/{{ . }}" target="_blank" rel="noreferrer">
+          <li><i class="icon-flickr"></i></li>
+        </a>
+      {{ end }}
+      {{ with .telegram }}
+        <a href="https://t.me/{{ . }}" target="_blank" rel="noreferrer">
+          <li><i class="icon-telegram"></i></li>
+        </a>
+      {{ end }}
+      {{ with .soundcloud }}
+        <a href="https://soundcloud.com/{{ . }}" target="_blank" rel="noreferrer">
+          <li><i class="icon-soundcloud"></i></li>
+        </a>
+      {{ end }}
+      {{ with .email }}
+        <a href="mailto:{{ . }}" target="_blank" rel="noreferrer">
+          <li><i class="icon-mail-alt"></i></li>
+        </a>
+      {{ end }}
+      {{ with .stackoverflow }}
+        <a href="https://stackoverflow.com/users/{{ . }}" target="_blank" rel="noreferrer">
+          <li><i class="icon-stack-overflow"></i></li>
+        </a>
+      {{ end }}
+    </ul>
+  {{ end }}
+
+  {{ with $plain.navigation }}
+    <nav class="navigation about-footer {{ $.condensedClass }}">
+      <ul>
+        {{ range . }}
+          <li>
+            <a href="{{ .url | relURL }}">{{ .title }}</a>
+          </li>
+        {{ end }}
+      </ul>
+    </nav>
+  {{ end }}
+
+  <p class="about-footer {{ .condensedClass }}">&copy; {{ now.Year }}</p>
+
+  {{ if $plain.darkMode }}
+    <div class="about-footer {{ .condensedClass }}">
+      <p>Dark Mode
+        <i class="icon-moon"></i>
+        <label class="switch">
+          <input type="checkbox" class="dark-mode-toggle">
+          <span class="slider round" onclick="toggleDarkMode()"></span>
+        </label>
+      </p>
+    </div>
+  {{ end }}
+</div>

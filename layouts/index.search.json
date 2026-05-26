@@ -1,0 +1,17 @@
+{{- $posts := where .Site.RegularPages.ByDate.Reverse "Section" "posts" -}}
+[
+  {{- range $index, $post := $posts -}}
+    {{- if gt $index 0 }},{{ end }}
+    {
+      "title": {{ $post.Title | jsonify }},
+      "title-lower": {{ lower $post.Title | jsonify }},
+      "sub-titile": {{ default "" $post.Params.subtitle | jsonify }},
+      "sub-titile-lower": {{ lower (default "" $post.Params.subtitle) | jsonify }},
+      "categories": {{ delimit $post.Params.categories ", " | jsonify }},
+      "tags": {{ delimit $post.Params.tags ", " | jsonify }},
+      "url": {{ $post.RelPermalink | jsonify }},
+      "date": {{ $post.Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+      "content": {{ $post.RawContent | plainify | replaceRE "\\s+" " " | truncate 200 | jsonify }}
+    }
+  {{- end -}}
+]

@@ -1,0 +1,33 @@
+{{ define "main" }}
+  {{ $plain := .Site.Params.plainwhite }}
+  {{ $displayTerms := .GetTerms "tags" }}
+  {{ if not $displayTerms }}
+    {{ $displayTerms = .GetTerms "categories" }}
+  {{ end }}
+  <div class="post-container">
+    <a class="post-link" href="{{ .RelPermalink }}">
+      <h2 class="post-title">{{ .Title }}</h2>
+    </a>
+    <div class="post-meta">
+      <div class="post-date"><i class="icon-calendar"></i>{{ .Date.Format $plain.dateFormat }}</div>
+      {{ if $displayTerms }}
+        <ul class="post-tags">
+          {{ range $displayTerms }}
+            <li><a href="{{ .RelPermalink }}">{{ lower .LinkTitle }}</a></li>
+          {{ end }}
+        </ul>
+      {{ end }}
+    </div>
+    {{ with .GetTerms "categories" }}
+      <p class="post-date">Filed under:
+        {{ range $index, $term := . }}
+          {{ if gt $index 0 }}, {{ end }}
+          <a href="{{ $term.RelPermalink }}">{{ lower $term.LinkTitle }}</a>
+        {{ end }}
+      </p>
+    {{ end }}
+    <div class="post">
+      {{ .Content }}
+    </div>
+  </div>
+{{ end }}

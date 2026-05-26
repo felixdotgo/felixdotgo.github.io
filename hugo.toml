@@ -1,0 +1,51 @@
+baseURL = "https://iamfelix.dev/"
+languageCode = "en"
+title = "Technology and self-development"
+
+[author]
+  name = "felixdotgo"
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[permalinks]
+  posts = "/posts/:slug/"
+
+[outputs]
+  home = ["html", "search"]
+  section = ["html"]
+  taxonomy = ["html"]
+  term = ["html"]
+
+[mediaTypes."application/json"]
+  suffixes = ["json"]
+
+[outputFormats.search]
+  mediaType = "application/json"
+  baseName = "search"
+  isPlainText = true
+  notAlternative = true
+  root = true
+
+[params]
+  email = "admin@iamfelix.dev"
+  description = "A blog of a senior fresher and lazy engineer"
+  showExcerpts = false
+
+  [params.plainwhite]
+    name = "Felix"
+    tagline = "Senior Fresher. Lazy Engineer"
+    dateFormat = "Jan 2, 2006"
+    darkMode = true
+    search = true
+    htmlLang = "en"
+    portfolioImage = "assets/portfolio.png"
+    condensedMobile = ["home", "page", "post"]
+
+    [[params.plainwhite.navigation]]
+      title = "About"
+      url = "/about/"
+
+    [params.plainwhite.socialLinks]
+      github = "felixdotgo"

@@ -1,0 +1,3 @@
+{{ define "main" }}
+  {{ partial "post-list.html" (dict "page" . "title" "posts" "showSearch" false "posts" .Pages.ByDate.Reverse) }}
+{{ end }}

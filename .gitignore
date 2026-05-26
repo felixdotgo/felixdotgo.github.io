@@ -7,3 +7,7 @@ Gemfile.lock
 vendor
 .jekyll-cache
 tags
+public/
+resources/
+.hugo_build.lock
+.serena/

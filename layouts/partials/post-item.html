@@ -1,0 +1,23 @@
+{{ $plain := .Site.Params.plainwhite }}
+{{ $displayTerms := .GetTerms "tags" }}
+{{ if not $displayTerms }}
+  {{ $displayTerms = .GetTerms "categories" }}
+{{ end }}
+<a class="post-link" href="{{ .RelPermalink }}">
+  <h2 class="post-title">{{ .Title }}</h2>
+</a>
+<div class="post-meta">
+  <div class="post-date">
+    <i class="icon-calendar"></i>{{ .Date.Format $plain.dateFormat }}
+  </div>
+  {{ if $displayTerms }}
+    <ul class="post-tags">
+      {{ range $displayTerms }}
+        <li><a href="{{ .RelPermalink }}">{{ lower .LinkTitle }}</a></li>
+      {{ end }}
+    </ul>
+  {{ end }}
+</div>
+{{ if $.Site.Params.showExcerpts }}
+  <div class="post">{{ .Summary }}</div>
+{{ end }}
